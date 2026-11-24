@@ -1,0 +1,10 @@
+# Pinned Python dependencies for the non-GPU helper scripts in scripts/.
+# Installed into project/.venv by scripts/setup_python.sh.
+cpplint==2.0.2
+numpy==2.5.5
+matplotlib==3.11.2
+pillow==13.0.0
+rasterio==1.5.2
+pystac-client==0.9.1
+requests==2.34.2
+imageio==2.38.2
