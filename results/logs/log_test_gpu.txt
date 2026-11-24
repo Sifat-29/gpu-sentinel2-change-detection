@@ -1,0 +1,864 @@
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+[ RUN  ] App.BenchmarkWritesOneRowPerTimedRun
+=== change_detect 1.0 ===
+command: change_detect --mode benchmark --input synthetic --synthetic-size 64x80x40 --repeat 2 --warmup 0 --backend cpu,cpu-mt --compare-to cpu --output-dir /tmp/cd_test_app_HH7XCo/bench --log-file /tmp/cd_test_app_HH7XCo/bench/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 22.279 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 2 | warmup 0 | csv /tmp/cd_test_app_HH7XCo/bench/benchmark.csv
+bench: cpu repeat 1/2 backend_total 2.114 ms kernel_total 1.932 ms
+bench: cpu repeat 2/2 backend_total 2.139 ms kernel_total 1.926 ms
+bench: cpu-mt repeat 1/2 backend_total 1.384 ms kernel_total 1.194 ms
+bench: cpu-mt repeat 2/2 backend_total 1.255 ms kernel_total 1.118 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+cpu | 2.126 | 2.114 | 2.139 | 1.929 | 0.62x
+cpu-mt | 1.320 | 1.255 | 1.384 | 1.156 | 1.00x
+benchmark_csv: /tmp/cd_test_app_HH7XCo/bench/benchmark.csv
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.002 seconds (backend cpu)
+=== change_detect 1.0 ===
+command: change_detect --mode benchmark --input synthetic --synthetic-size 32x32x40 --repeat 1 --warmup 0 --backend cpu-mt --output-dir /tmp/cd_test_app_HH7XCo/bench
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_32x32x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 32 x 32
+pixels: 1024
+pixel time series: 1024
+samples (pixel-dates): 40960
+input bytes: 0.20 MB
+synthetic_generation: 7.023 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 1 | warmup 0 | csv /tmp/cd_test_app_HH7XCo/bench/benchmark.csv
+bench: cpu-mt repeat 1/1 backend_total 1.016 ms kernel_total 0.901 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+cpu-mt | 1.016 | 1.016 | 1.016 | 0.901 | 1.00x
+benchmark_csv: /tmp/cd_test_app_HH7XCo/bench/benchmark.csv
+SUMMARY: processed 1024 pixel time series (40960 samples) in 0.001 seconds (backend cpu-mt)
+[  OK  ] App.BenchmarkWritesOneRowPerTimedRun (57.7 ms)
+[ RUN  ] App.CoregNeedsAGpuBackend
+=== change_detect 1.0 ===
+command: change_detect --mode coreg --input synthetic --backend cpu --log-file /tmp/cd_test_app_yumZtD/log.txt --output-dir /tmp/cd_test_app_yumZtD
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+error: --mode coreg needs a GPU backend (gpu or gpu-unfused), got 'cpu'
+[  OK  ] App.CoregNeedsAGpuBackend (3.6 ms)
+[ RUN  ] App.DetectSyntheticCpuMtWritesAllOutputsAndLog
+=== change_detect 1.0 ===
+command: change_detect --mode detect --input synthetic --synthetic-size 64x80x40 --backend cpu-mt --output-dir /tmp/cd_test_app_5KZGu2/out --log-file /tmp/cd_test_app_5KZGu2/out/log.txt --quiet
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 19.742 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: cpu-mt (FP32, 16 threads) | block_size: - | streams: - | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+--- timings (ms) ---
+read_input: 0.089 | read_gbps: 11.49 | read_wait: 0.123 | setup: 0.010 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 0.980 | backend_total: 1.163 | post: 0.899 | write_outputs: 1.048 | wall_total: 3.193
+throughput: 176.1 Msamples/s | kernel_throughput: 209.1 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 876 (17.11%) | break: 149 (2.91%) [loss 120, gain 29] | insufficient_data: 4095 (79.98%)
+reference: none
+synthetic_recovery: recovered 135 of 137 eligible (98.5%) | false_breaks 12 of 4367 (0.3%)
+outputs: /tmp/cd_test_app_5KZGu2/out
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.003 seconds (backend cpu-mt)
+[  OK  ] App.DetectSyntheticCpuMtWritesAllOutputsAndLog (27.2 ms)
+[ RUN  ] App.DetectSyntheticGpuAgreesWithCpu
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --backend gpu --compare-to cpu --cleanup --output-dir /tmp/cd_test_app_SvCLfs/out --log-file /tmp/cd_test_app_SvCLfs/out/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 19.688 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: yes
+--- execution ---
+backend: gpu (fused kernel) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+gpu_memory: allocated 1 MiB in 1 ms (pinned host buffers included); cudaMemGetInfo used delta 2 MiB
+[tile 1/1] rows 0..63
+--- timings (ms) ---
+read_input: 0.083 | read_gbps: 12.27 | read_wait: - | setup: 8.214 | h2d: 0.149 | ndvi: - | fit: - | detect: - | fused: 0.158 | d2h: 0.025 | kernel_total: 0.158 | backend_total: 9.392 | post: 3.154 | write_outputs: 1.232 | wall_total: 18.566
+throughput: 21.8 Msamples/s | kernel_throughput: 1297.6 Msamples/s
+device_memory_peak: 1 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 1022 (19.96%) | break: 3 (0.06%) [loss 3, gain 0] | insufficient_data: 4095 (79.98%)
+reference: none
+agreement_vs_cpu: identical_break_index 1.0000 | identical_status 1.0000 | max_coef_diff -
+synthetic_recovery: recovered 1 of 137 eligible (0.7%) | false_breaks 2 of 4367 (0.0%)
+outputs: /tmp/cd_test_app_SvCLfs/out
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.019 seconds (backend gpu)
+=== change_detect 1.0 ===
+command: change_detect --mode benchmark --input synthetic --synthetic-size 64x80x40 --repeat 2 --warmup 1 --backend gpu,gpu-unfused,cpu-mt --output-dir /tmp/cd_test_app_SvCLfs/bench
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 20.037 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 2 | warmup 1 | csv /tmp/cd_test_app_SvCLfs/bench/benchmark.csv
+bench: gpu repeat 1/2 backend_total 2.465 ms kernel_total 0.073 ms
+bench: gpu repeat 2/2 backend_total 2.213 ms kernel_total 0.067 ms
+bench: gpu-unfused repeat 1/2 backend_total 2.374 ms kernel_total 0.117 ms
+bench: gpu-unfused repeat 2/2 backend_total 2.248 ms kernel_total 0.085 ms
+bench: cpu-mt repeat 1/2 backend_total 1.344 ms kernel_total 1.188 ms
+bench: cpu-mt repeat 2/2 backend_total 1.040 ms kernel_total 0.863 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+gpu | 2.339 | 2.213 | 2.465 | 0.070 | 0.51x
+gpu-unfused | 2.311 | 2.248 | 2.374 | 0.101 | 0.52x
+cpu-mt | 1.192 | 1.040 | 1.344 | 1.025 | 1.00x
+benchmark_csv: /tmp/cd_test_app_SvCLfs/bench/benchmark.csv
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.002 seconds (backend gpu)
+[  OK  ] App.DetectSyntheticGpuAgreesWithCpu (92.8 ms)
+[ RUN  ] App.DetectWithComparisonCoefficientsAndReference
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --backend cpu-fp32 --compare-to cpu --save-coefficients --cleanup --reference /tmp/cd_test_app_gWSNfQ/reference.u8 --sample-pixels 3,4;10,20 --png-max-dim 32 --output-dir /tmp/cd_test_app_gWSNfQ/out --log-file /tmp/cd_test_app_gWSNfQ/out/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 19.538 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: yes
+--- execution ---
+backend: cpu-fp32 (FP32, 1 thread) | block_size: - | streams: - | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+[tile 1/1] rows 0..63
+--- timings (ms) ---
+read_input: 0.127 | read_gbps: 8.06 | read_wait: 0.160 | setup: 0.022 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 1.872 | backend_total: 2.104 | post: 0.030 | write_outputs: 0.452 | wall_total: 2.687
+throughput: 97.3 Msamples/s | kernel_throughput: 109.4 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 1022 (19.96%) | break: 3 (0.06%) [loss 3, gain 0] | insufficient_data: 4095 (79.98%)
+reference: /tmp/cd_test_app_gWSNfQ/reference.u8
+validation: precision 0.000 | recall 0.000 | f1 0.000 | year_exact 0.000 | year_within1 0.000 (tp 0 fp 3 fn 0) [some ratios undefined: zero denominator, reported as 0]
+agreement_vs_cpu: identical_break_index 1.0000 | identical_status 1.0000 | max_coef_diff 2.38e-07
+synthetic_recovery: recovered 1 of 137 eligible (0.7%) | false_breaks 2 of 4367 (0.0%)
+outputs: /tmp/cd_test_app_gWSNfQ/out
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.003 seconds (backend cpu-fp32)
+[  OK  ] App.DetectWithComparisonCoefficientsAndReference (29.3 ms)
+[ RUN  ] App.ExtrapolateTrendIsLogged
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 32x32x40 --backend cpu-mt --trend extrapolate --output-dir /tmp/cd_test_app_QYtj4O/out --log-file /tmp/cd_test_app_QYtj4O/out/log.txt --quiet
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_32x32x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 32 x 32
+pixels: 1024
+pixel time series: 1024
+samples (pixel-dates): 40960
+input bytes: 0.20 MB
+synthetic_generation: 7.407 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: extrapolate | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: cpu-mt (FP32, 16 threads) | block_size: - | streams: - | io_threads: 8 | tile_rows: 32 | tiles: 1 | tile_input_bytes: 204800
+--- timings (ms) ---
+read_input: 0.019 | read_gbps: 10.94 | read_wait: 0.049 | setup: 0.006 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 0.801 | backend_total: 0.901 | post: 1.001 | write_outputs: 0.636 | wall_total: 2.615
+throughput: 45.5 Msamples/s | kernel_throughput: 51.1 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 154 (15.04%) | break: 40 (3.91%) [loss 31, gain 9] | insufficient_data: 830 (81.05%)
+reference: none
+synthetic_recovery: recovered 29 of 31 eligible (93.5%) | false_breaks 9 of 873 (1.0%)
+outputs: /tmp/cd_test_app_QYtj4O/out
+SUMMARY: processed 1024 pixel time series (40960 samples) in 0.003 seconds (backend cpu-mt)
+[  OK  ] App.ExtrapolateTrendIsLogged (14.5 ms)
+[ RUN  ] App.GenerateThenDetectAndQuickDiffFromDisk
+=== change_detect 1.0 ===
+command: change_detect --mode generate --input synthetic --synthetic-size 64x80x40 --output-dir /tmp/cd_test_app_68JLVu/cube
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- generate ---
+size H x W x T: 64 x 80 x 40
+samples (pixel-dates): 204800
+raw bytes: 1034240 (red, nir, scl, truth)
+seed: 42 | noise: 0.030 | cloud_fraction: 0.200 | break_fraction: 0.150
+outputs: /tmp/cd_test_app_68JLVu/cube/manifest.txt
+SUMMARY: generated 64 x 80 x 40 synthetic cube (204800 samples) in 0.021 seconds
+=== change_detect 1.0 ===
+command: change_detect --input /tmp/cd_test_app_68JLVu/cube/manifest.txt --backend cpu --output-dir /tmp/cd_test_app_68JLVu/detect --log-file /tmp/cd_test_app_68JLVu/detect/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (/tmp/cd_test_app_68JLVu/cube/manifest.txt)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: cpu (FP64, 1 thread) | block_size: - | streams: - | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+[tile 1/1] rows 0..63
+--- timings (ms) ---
+read_input: 0.183 | read_gbps: 5.60 | read_wait: 0.222 | setup: 0.009 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 1.943 | backend_total: 2.213 | post: 0.036 | write_outputs: 2.115 | wall_total: 4.436
+throughput: 92.5 Msamples/s | kernel_throughput: 105.4 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 876 (17.11%) | break: 149 (2.91%) [loss 120, gain 29] | insufficient_data: 4095 (79.98%)
+reference: none
+outputs: /tmp/cd_test_app_68JLVu/detect
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.004 seconds (backend cpu)
+=== change_detect 1.0 ===
+command: change_detect --mode quick-diff --input /tmp/cd_test_app_68JLVu/cube/manifest.txt --backend cpu-mt --output-dir /tmp/cd_test_app_68JLVu/quick --log-file /tmp/cd_test_app_68JLVu/quick/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (/tmp/cd_test_app_68JLVu/cube/manifest.txt)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- quick-diff ---
+backend: cpu-mt | date_a: 0 (2019-01-01) | date_b: 39 (2022-11-25) | diff_threshold: 0.200
+--- timings (ms) ---
+read_input: 0.101 | read_gbps: 0.51 | read_wait: - | setup: - | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 0.051 | backend_total: 0.156 | post: - | write_outputs: 0.737 | wall_total: 0.895
+throughput: 65.5 Msamples/s | kernel_throughput: 199.9 Msamples/s
+--- results ---
+no_data: 1869 | no_change: 2798 | loss: 355 | gain: 98
+outputs: /tmp/cd_test_app_68JLVu/quick
+SUMMARY: processed 5120 pixels (2 dates, 10240 samples) in 0.001 seconds (backend cpu-mt)
+[  OK  ] App.GenerateThenDetectAndQuickDiffFromDisk (40.4 ms)
+[ RUN  ] App.GpuBackendWithoutGpuIsAClearError
+[  OK  ] App.GpuBackendWithoutGpuIsAClearError (0.0 ms)
+[ RUN  ] App.GpuValidationInPipelineAgreesWithCpu
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --reference /tmp/cd_test_app_QRgQDp/reference.u8 --png-max-dim 16 --backend gpu-unfused --tile-rows 16 --output-dir /tmp/cd_test_app_QRgQDp/gpu --log-file /tmp/cd_test_app_QRgQDp/gpu/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 19.636 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: gpu-unfused (separate NDVI, fit and detect kernels) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 16 | tiles: 4 | tile_input_bytes: 256000
+gpu_memory: allocated 1 MiB in 1 ms (pinned host buffers included); cudaMemGetInfo used delta 2 MiB
+[tile 1/4] rows 0..15
+[tile 2/4] rows 16..31
+[tile 3/4] rows 32..47
+[tile 4/4] rows 48..63
+--- timings (ms) ---
+read_input: 0.094 | read_gbps: 10.93 | read_wait: - | setup: 2.564 | h2d: 0.247 | ndvi: 0.031 | fit: 0.111 | detect: 0.051 | fused: - | d2h: 0.180 | kernel_total: 0.311 | backend_total: 4.511 | post: 1.825 | write_outputs: 0.868 | wall_total: 7.355
+throughput: 45.4 Msamples/s | kernel_throughput: 658.5 Msamples/s
+device_memory_peak: 1 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 876 (17.11%) | break: 149 (2.91%) [loss 120, gain 29] | insufficient_data: 4095 (79.98%)
+reference: /tmp/cd_test_app_QRgQDp/reference.u8
+validation: precision 0.645 | recall 0.023 | f1 0.045 | year_exact 0.493 | year_within1 1.000 (tp 71 fp 39 fn 3001)
+synthetic_recovery: recovered 135 of 137 eligible (98.5%) | false_breaks 12 of 4367 (0.3%)
+outputs: /tmp/cd_test_app_QRgQDp/gpu
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.007 seconds (backend gpu-unfused)
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --reference /tmp/cd_test_app_QRgQDp/reference.u8 --png-max-dim 16 --backend cpu-fp32 --output-dir /tmp/cd_test_app_QRgQDp/cpu --log-file /tmp/cd_test_app_QRgQDp/cpu/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 20.126 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: cpu-fp32 (FP32, 1 thread) | block_size: - | streams: - | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+[tile 1/1] rows 0..63
+--- timings (ms) ---
+read_input: 0.087 | read_gbps: 11.72 | read_wait: 0.129 | setup: 0.009 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 1.873 | backend_total: 2.065 | post: 0.029 | write_outputs: 0.800 | wall_total: 3.018
+throughput: 99.2 Msamples/s | kernel_throughput: 109.3 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 876 (17.11%) | break: 149 (2.91%) [loss 120, gain 29] | insufficient_data: 4095 (79.98%)
+reference: /tmp/cd_test_app_QRgQDp/reference.u8
+validation: precision 0.645 | recall 0.023 | f1 0.045 | year_exact 0.493 | year_within1 1.000 (tp 71 fp 39 fn 3001)
+synthetic_recovery: recovered 135 of 137 eligible (98.5%) | false_breaks 12 of 4367 (0.3%)
+outputs: /tmp/cd_test_app_QRgQDp/cpu
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.003 seconds (backend cpu-fp32)
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --reference /tmp/cd_test_app_QRgQDp/reference.u8 --png-max-dim 16 --backend gpu --cleanup --output-dir /tmp/cd_test_app_QRgQDp/cleaned --log-file /tmp/cd_test_app_QRgQDp/cleaned/log.txt
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_64x80x40_seed42 (synthetic)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 64 x 80
+pixels: 5120
+pixel time series: 5120
+samples (pixel-dates): 204800
+input bytes: 1.02 MB
+synthetic_generation: 20.605 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: yes
+--- execution ---
+backend: gpu (fused kernel) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 64 | tiles: 1 | tile_input_bytes: 1024000
+gpu_memory: allocated 1 MiB in 1 ms (pinned host buffers included); cudaMemGetInfo used delta 2 MiB
+[tile 1/1] rows 0..63
+--- timings (ms) ---
+read_input: 0.081 | read_gbps: 12.62 | read_wait: - | setup: 2.222 | h2d: 0.147 | ndvi: - | fit: - | detect: - | fused: 0.082 | d2h: 0.025 | kernel_total: 0.082 | backend_total: 3.303 | post: 3.491 | write_outputs: 0.913 | wall_total: 7.861
+throughput: 62.0 Msamples/s | kernel_throughput: 2482.5 Msamples/s
+device_memory_peak: 1 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 1022 (19.96%) | break: 3 (0.06%) [loss 3, gain 0] | insufficient_data: 4095 (79.98%)
+reference: /tmp/cd_test_app_QRgQDp/reference.u8
+validation: precision 0.333 | recall 0.000 | f1 0.001 | year_exact 0.000 | year_within1 1.000 (tp 1 fp 2 fn 3071)
+synthetic_recovery: recovered 1 of 137 eligible (0.7%) | false_breaks 2 of 4367 (0.0%)
+outputs: /tmp/cd_test_app_QRgQDp/cleaned
+SUMMARY: processed 5120 pixel time series (204800 samples) in 0.008 seconds (backend gpu)
+[  OK  ] App.GpuValidationInPipelineAgreesWithCpu (92.7 ms)
+[ RUN  ] App.LogShowsPathsRelativeToWorkingDirectory
+=== change_detect 1.0 ===
+command: change_detect --mode generate --input synthetic --synthetic-size 32x40x40 --output-dir cube
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- generate ---
+size H x W x T: 32 x 40 x 40
+samples (pixel-dates): 51200
+raw bytes: 258560 (red, nir, scl, truth)
+seed: 42 | noise: 0.030 | cloud_fraction: 0.200 | break_fraction: 0.150
+outputs: cube/manifest.txt
+SUMMARY: generated 32 x 40 x 40 synthetic cube (51200 samples) in 0.008 seconds
+=== change_detect 1.0 ===
+command: change_detect --input /tmp/cd_test_app_aIZFHC/cube/manifest.txt --backend cpu --reference /tmp/cd_test_app_aIZFHC/reference.u8 --output-dir /tmp/cd_test_app_aIZFHC/out --log-file run.log --quiet
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_32x40x40_seed42 (cube/manifest.txt)
+scenes (dates) T: 40 [2019-01-01 .. 2022-11-25]
+image size H x W: 32 x 40
+pixels: 1280
+pixel time series: 1280
+samples (pixel-dates): 51200
+input bytes: 0.26 MB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 20) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: cpu (FP64, 1 thread) | block_size: - | streams: - | io_threads: 8 | tile_rows: 32 | tiles: 1 | tile_input_bytes: 256000
+--- timings (ms) ---
+read_input: 0.181 | read_gbps: 1.41 | read_wait: 0.249 | setup: 0.007 | h2d: - | ndvi: - | fit: - | detect: - | fused: - | d2h: - | kernel_total: 0.512 | backend_total: 0.819 | post: 0.013 | write_outputs: 1.510 | wall_total: 2.419
+throughput: 62.5 Msamples/s | kernel_throughput: 99.9 Msamples/s
+device_memory_peak: -
+--- results ---
+stable: 217 (16.95%) | break: 43 (3.36%) [loss 37, gain 6] | insufficient_data: 1020 (79.69%)
+reference: reference.u8
+validation: precision 0.000 | recall 0.000 | f1 0.000 | year_exact 0.000 | year_within1 0.000 (tp 0 fp 37 fn 0) [some ratios undefined: zero denominator, reported as 0]
+outputs: out
+SUMMARY: processed 1280 pixel time series (51200 samples) in 0.002 seconds (backend cpu)
+[  OK  ] App.LogShowsPathsRelativeToWorkingDirectory (19.8 ms)
+[ RUN  ] App.MissingManifestIsAnError
+=== change_detect 1.0 ===
+command: change_detect --input /tmp/cd_test_app_yDGfOQ/nope/manifest.txt --backend cpu --output-dir /tmp/cd_test_app_yDGfOQ
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+error: cannot open manifest '/tmp/cd_test_app_yDGfOQ/nope/manifest.txt'
+[  OK  ] App.MissingManifestIsAnError (3.7 ms)
+[ RUN  ] App.QuickDiffRejectsBadDates
+=== change_detect 1.0 ===
+command: change_detect --mode quick-diff --input synthetic --synthetic-size 16x16x40 --backend cpu --date-a 40 --output-dir /tmp/cd_test_app_D2XQld
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+error: --date-a and --date-b must be two different dates in 0..39, got 40 and 39
+[  OK  ] App.QuickDiffRejectsBadDates (8.1 ms)
+[ RUN  ] App.SamplePixelOutsideTheImageIsAnError
+=== change_detect 1.0 ===
+command: change_detect --input synthetic --synthetic-size 64x80x40 --backend cpu --sample-pixels 64,0 --output-dir /tmp/cd_test_app_Nzz4co
+start_time: 2026-11-24T05:25:21
+git_commit: 3f963be
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7052 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+error: --sample-pixels: pixel (64, 0) is outside the 64 x 80 image
+[  OK  ] App.SamplePixelOutsideTheImageIsAnError (23.4 ms)
+[ RUN  ] Colormap.BreakRampEndpointsAndAlpha
+[  OK  ] Colormap.BreakRampEndpointsAndAlpha (0.0 ms)
+[ RUN  ] Colormap.DegenerateSpanDoesNotDivideByZero
+[  OK  ] Colormap.DegenerateSpanDoesNotDivideByZero (0.0 ms)
+[ RUN  ] Colormap.StableAndInsufficient
+[  OK  ] Colormap.StableAndInsufficient (0.0 ms)
+[ RUN  ] Colormap.StopBoundariesUseIntegerArithmetic
+[  OK  ] Colormap.StopBoundariesUseIntegerArithmetic (0.0 ms)
+[ RUN  ] Coreg.FlagParsing
+[  OK  ] Coreg.FlagParsing (0.1 ms)
+[ RUN  ] Coreg.FlagRules
+[  OK  ] Coreg.FlagRules (0.0 ms)
+[ RUN  ] Coreg.RecoversKnownShifts
+[  OK  ] Coreg.RecoversKnownShifts (1207.2 ms)
+[ RUN  ] Coreg.ReferenceDateGivesZeroShift
+[  OK  ] Coreg.ReferenceDateGivesZeroShift (902.6 ms)
+[ RUN  ] Coreg.RejectsBadGpuInput
+[  OK  ] Coreg.RejectsBadGpuInput (594.4 ms)
+[ RUN  ] Coreg.UnrelatedSceneHasLowPeak
+[  OK  ] Coreg.UnrelatedSceneHasLowPeak (604.8 ms)
+[ RUN  ] Coreg.WindowResolution
+[  OK  ] Coreg.WindowResolution (0.0 ms)
+[ RUN  ] CpuBackend.AutomaticTileRowsUseTheSharedInputCap
+[  OK  ] CpuBackend.AutomaticTileRowsUseTheSharedInputCap (813.6 ms)
+[ RUN  ] CpuBackend.CoefficientsOnlyWhenRequested
+[  OK  ] CpuBackend.CoefficientsOnlyWhenRequested (1.3 ms)
+[ RUN  ] CpuBackend.Fp32MatchesFp64OnMostPixels
+  fp32 vs fp64: identical break index 100.000 %, status 100.000 %, max |coef diff| 2.98e-07
+[  OK  ] CpuBackend.Fp32MatchesFp64OnMostPixels (18.1 ms)
+[ RUN  ] CpuBackend.MultithreadedMatchesSingleThreadFp32Exactly
+[  OK  ] CpuBackend.MultithreadedMatchesSingleThreadFp32Exactly (39.2 ms)
+[ RUN  ] CpuBackend.NullTimingsAndStatsAreAllowed
+[  OK  ] CpuBackend.NullTimingsAndStatsAreAllowed (0.3 ms)
+[ RUN  ] CpuBackend.OtherHarmonicCounts
+[  OK  ] CpuBackend.OtherHarmonicCounts (4.5 ms)
+[ RUN  ] CpuBackend.ReadFailureIsReported
+[  OK  ] CpuBackend.ReadFailureIsReported (2.4 ms)
+[ RUN  ] CpuBackend.RecoversInjectedSteps
+  steps found 652 of 652, false alarms 2 of 4898
+[  OK  ] CpuBackend.RecoversInjectedSteps (14.3 ms)
+[ RUN  ] CpuBackend.RejectsInvalidRequests
+[  OK  ] CpuBackend.RejectsInvalidRequests (0.1 ms)
+[ RUN  ] CpuBackend.ReportsTimingsAndStats
+[  OK  ] CpuBackend.ReportsTimingsAndStats (18.8 ms)
+[ RUN  ] CpuBackend.ResultsIndependentOfTileRows
+[  OK  ] CpuBackend.ResultsIndependentOfTileRows (8.5 ms)
+[ RUN  ] CpuBackend.TrajectoryMatchesDetection
+[  OK  ] CpuBackend.TrajectoryMatchesDetection (2.0 ms)
+[ RUN  ] CpuBackend.TrajectoryRejectsOutOfRangePixel
+[  OK  ] CpuBackend.TrajectoryRejectsOutOfRangePixel (0.1 ms)
+[ RUN  ] CubeIo.ManifestAcceptsCommentsCrlfAndUnknownKeys
+warning: /tmp/cd_test_cube_io_7KqrYI/manifest.txt:5: unknown key 'mystery' ignored
+[  OK  ] CubeIo.ManifestAcceptsCommentsCrlfAndUnknownKeys (0.6 ms)
+[ RUN  ] CubeIo.ManifestErrors
+[  OK  ] CubeIo.ManifestErrors (4.2 ms)
+[ RUN  ] CubeIo.ManifestRejectsWrongFileSizes
+[  OK  ] CubeIo.ManifestRejectsWrongFileSizes (6.0 ms)
+[ RUN  ] CubeIo.ManifestRoundTrip
+[  OK  ] CubeIo.ManifestRoundTrip (0.6 ms)
+[ RUN  ] CubeIo.MemoryCubeEqualsRawCube
+[  OK  ] CubeIo.MemoryCubeEqualsRawCube (0.3 ms)
+[ RUN  ] CubeIo.OpenRawCubeReportsMissingAndShortFiles
+[  OK  ] CubeIo.OpenRawCubeReportsMissingAndShortFiles (0.3 ms)
+[ RUN  ] CubeIo.ParallelReaderIsByteIdenticalToSequential
+[  OK  ] CubeIo.ParallelReaderIsByteIdenticalToSequential (13.1 ms)
+[ RUN  ] CubeIo.ParallelReaderReportsReadErrorsWithoutHanging
+[  OK  ] CubeIo.ParallelReaderReportsReadErrorsWithoutHanging (2.2 ms)
+[ RUN  ] CubeIo.RawArrayHelpers
+[  OK  ] CubeIo.RawArrayHelpers (0.2 ms)
+[ RUN  ] CubeIo.ReadTileMatchesRawSlices
+[  OK  ] CubeIo.ReadTileMatchesRawSlices (0.3 ms)
+[ RUN  ] Flags.BackendListsAndAll
+[  OK  ] Flags.BackendListsAndAll (0.0 ms)
+[ RUN  ] Flags.BadModeAndBackend
+[  OK  ] Flags.BadModeAndBackend (0.0 ms)
+[ RUN  ] Flags.ConversionToConfigs
+[  OK  ] Flags.ConversionToConfigs (0.0 ms)
+[ RUN  ] Flags.DefaultsWithOnlyInput
+[  OK  ] Flags.DefaultsWithOnlyInput (0.0 ms)
+[ RUN  ] Flags.HelpWinsAndNeedsNoInput
+[  OK  ] Flags.HelpWinsAndNeedsNoInput (0.0 ms)
+[ RUN  ] Flags.MinTrainObsBelowParameterCount
+[  OK  ] Flags.MinTrainObsBelowParameterCount (0.0 ms)
+[ RUN  ] Flags.MissingInputIsError
+[  OK  ] Flags.MissingInputIsError (0.0 ms)
+[ RUN  ] Flags.MissingValue
+[  OK  ] Flags.MissingValue (0.0 ms)
+[ RUN  ] Flags.NumericRangeErrors
+[  OK  ] Flags.NumericRangeErrors (0.1 ms)
+[ RUN  ] Flags.SamplePixelsList
+[  OK  ] Flags.SamplePixelsList (0.0 ms)
+[ RUN  ] Flags.SwitchesRejectValues
+[  OK  ] Flags.SwitchesRejectValues (0.0 ms)
+[ RUN  ] Flags.SyntheticSize
+[  OK  ] Flags.SyntheticSize (0.0 ms)
+[ RUN  ] Flags.TraceCsvIsForGpuDetectRunsOnly
+[  OK  ] Flags.TraceCsvIsForGpuDetectRunsOnly (0.0 ms)
+[ RUN  ] Flags.UnknownFlagAndStrayArgument
+[  OK  ] Flags.UnknownFlagAndStrayArgument (0.0 ms)
+[ RUN  ] Flags.UsageListsEveryFlag
+[  OK  ] Flags.UsageListsEveryFlag (0.0 ms)
+[ RUN  ] Flags.ValidClassesMask
+[  OK  ] Flags.ValidClassesMask (0.0 ms)
+[ RUN  ] Flags.ValidFullParse
+[  OK  ] Flags.ValidFullParse (0.0 ms)
+[ RUN  ] GpuKernels.EveryKernelAfterOneUpload
+K=1 fused vs unfused: break 1.0000 status 1.0000 coef diff 0.00e+00
+K=2 fused vs unfused: break 1.0000 status 1.0000 coef diff 0.00e+00
+K=3 fused vs unfused: break 1.0000 status 1.0000 coef diff 0.00e+00
+[  OK  ] GpuKernels.EveryKernelAfterOneUpload (13.3 ms)
+[ RUN  ] GpuKernels.NdviMatchesHost
+ndvi kernel vs host: max 0 ulp, validity mismatches 0
+[  OK  ] GpuKernels.NdviMatchesHost (10.3 ms)
+[ RUN  ] GpuKernels.NoWritesOutsideTheOutputBuffers
+[  OK  ] GpuKernels.NoWritesOutsideTheOutputBuffers (11.6 ms)
+[ RUN  ] GpuKernels.RejectsInvalidArguments
+[  OK  ] GpuKernels.RejectsInvalidArguments (1.7 ms)
+[ RUN  ] GpuPipeline.AgreementWithCpuAndRecovery
+gpu vs cpu(FP64): break 1.0000 status 1.0000 | vs cpu-fp32: break 1.0000 | max coef diff 4.92e-07 | recovered 0.9886 false breaks 0.0120
+gpu-unfused vs cpu(FP64): break 1.0000 status 1.0000 | vs cpu-fp32: break 1.0000 | max coef diff 4.92e-07 | recovered 0.9886 false breaks 0.0120
+fused vs unfused: break 1.00000 status 1.00000
+[  OK  ] GpuPipeline.AgreementWithCpuAndRecovery (228.3 ms)
+[ RUN  ] GpuPipeline.BlockSizeAboveRegisterLimitIsReported
+[  OK  ] GpuPipeline.BlockSizeAboveRegisterLimitIsReported (82.3 ms)
+[ RUN  ] GpuPipeline.DeviceIsAvailable
+[  OK  ] GpuPipeline.DeviceIsAvailable (0.1 ms)
+[ RUN  ] GpuPipeline.HarmonicsOneAndThreeMatchCpuFp32
+K=1 gpu vs cpu-fp32: break 1.0000
+K=1 gpu-unfused vs cpu-fp32: break 1.0000
+K=3 gpu vs cpu-fp32: break 1.0000
+K=3 gpu-unfused vs cpu-fp32: break 1.0000
+[  OK  ] GpuPipeline.HarmonicsOneAndThreeMatchCpuFp32 (135.2 ms)
+[ RUN  ] GpuPipeline.InPipelineValidationIsTracedAndChecked
+[  OK  ] GpuPipeline.InPipelineValidationIsTracedAndChecked (37.2 ms)
+[ RUN  ] GpuPipeline.InPipelineValidationMatchesCpuCounts
+[  OK  ] GpuPipeline.InPipelineValidationMatchesCpuCounts (169.2 ms)
+[ RUN  ] GpuPipeline.NeverAllocatesMoreSlotsThanTiles
+[  OK  ] GpuPipeline.NeverAllocatesMoreSlotsThanTiles (53.6 ms)
+[ RUN  ] GpuPipeline.QuickDiffMatchesCpu
+[  OK  ] GpuPipeline.QuickDiffMatchesCpu (56.5 ms)
+[ RUN  ] GpuPipeline.ReadErrorIsReportedAndResourcesAreFreed
+[  OK  ] GpuPipeline.ReadErrorIsReportedAndResourcesAreFreed (21.9 ms)
+[ RUN  ] GpuPipeline.RejectsInvalidConfigurations
+[  OK  ] GpuPipeline.RejectsInvalidConfigurations (0.1 ms)
+[ RUN  ] GpuPipeline.RetriesWithFewerRowsWhenAllocationFails
+tile allocation failed; retrying with 64 rows
+tile allocation failed; retrying with 32 rows
+tile allocation failed; retrying with 16 rows
+tile allocation failed; retrying with 64 rows
+tile allocation failed; retrying with 32 rows
+tile allocation failed; retrying with 16 rows
+tile allocation failed; retrying with 8 rows
+tile allocation failed; retrying with 4 rows
+tile allocation failed; retrying with 2 rows
+tile allocation failed; retrying with 1 rows
+[  OK  ] GpuPipeline.RetriesWithFewerRowsWhenAllocationFails (53.8 ms)
+[ RUN  ] GpuPipeline.StreamsTilesAndBlocksGiveIdenticalResults
+[  OK  ] GpuPipeline.StreamsTilesAndBlocksGiveIdenticalResults (361.2 ms)
+[ RUN  ] GpuPipeline.TimingsAndStatsAreFilled
+fused: h2d 1.44 kernel 0.23 d2h 0.27 read 1.54 total 18.18 ms | unfused: ndvi 0.55 fit 0.06 detect 0.06 ms
+[  OK  ] GpuPipeline.TimingsAndStatsAreFilled (30.3 ms)
+[ RUN  ] GpuPipeline.TraceCsvHasOneRowPerTileAndStage
+[  OK  ] GpuPipeline.TraceCsvHasOneRowPerTileAndStage (84.1 ms)
+[ RUN  ] GpuPipeline.TraceDoesNotChangeResults
+[  OK  ] GpuPipeline.TraceDoesNotChangeResults (121.6 ms)
+[ RUN  ] GpuPipeline.TraceToAnUnwritablePathIsAnError
+[  OK  ] GpuPipeline.TraceToAnUnwritablePathIsAnError (22.3 ms)
+[ RUN  ] GpuPostprocess.CleanupMatchesCpu
+[  OK  ] GpuPostprocess.CleanupMatchesCpu (111.9 ms)
+[ RUN  ] GpuPostprocess.ColorizeMatchesCpuByteForByte
+[  OK  ] GpuPostprocess.ColorizeMatchesCpuByteForByte (9.0 ms)
+[ RUN  ] GpuPostprocess.ColorizeOfDownsampledMapMatchesCpu
+[  OK  ] GpuPostprocess.ColorizeOfDownsampledMapMatchesCpu (1.3 ms)
+[ RUN  ] GpuPostprocess.ConfusionMatchesHostCounts
+[  OK  ] GpuPostprocess.ConfusionMatchesHostCounts (83.7 ms)
+[ SKIP ] LargeGpu.StreamsCubeLargerThanDeviceMemory (large test; select it with --filter)
+[ SKIP ] LargePerf.Backends (large test; select it with --filter)
+[ RUN  ] Logger.WritesToFile
+hello
+key: value
+--- section ---
+[  OK  ] Logger.WritesToFile (0.1 ms)
+[ RUN  ] Outputs.AgreementFractionsAndCoefficientDifference
+[  OK  ] Outputs.AgreementFractionsAndCoefficientDifference (0.0 ms)
+[ RUN  ] Outputs.BenchmarkCsvAppendRules
+[  OK  ] Outputs.BenchmarkCsvAppendRules (0.4 ms)
+[ RUN  ] Outputs.BenchmarkCsvHeaderMatchesPlan
+[  OK  ] Outputs.BenchmarkCsvHeaderMatchesPlan (0.0 ms)
+[ RUN  ] Outputs.BenchmarkRowFormatting
+[  OK  ] Outputs.BenchmarkRowFormatting (0.0 ms)
+[ RUN  ] Outputs.ChangeMapBlockPriorityBreakStableInsufficient
+[  OK  ] Outputs.ChangeMapBlockPriorityBreakStableInsufficient (0.0 ms)
+[ RUN  ] Outputs.ChangeMapEdgeBlocksAndNoDownsampling
+[  OK  ] Outputs.ChangeMapEdgeBlocksAndNoDownsampling (0.0 ms)
+[ RUN  ] Outputs.ChangeMapKeepsSingleBreakInLargeBlock
+[  OK  ] Outputs.ChangeMapKeepsSingleBreakInLargeBlock (0.0 ms)
+[ RUN  ] Outputs.ColouringAfterDownsamplingEqualsDownsamplingColours
+[  OK  ] Outputs.ColouringAfterDownsamplingEqualsDownsamplingColours (1.5 ms)
+[ RUN  ] Outputs.DownsampleFactor
+[  OK  ] Outputs.DownsampleFactor (0.0 ms)
+[ RUN  ] Outputs.ExplicitSamplePixelsAreCheckedAgainstTheBounds
+[  OK  ] Outputs.ExplicitSamplePixelsAreCheckedAgainstTheBounds (0.0 ms)
+[ RUN  ] Outputs.MedianAndMedianTable
+[  OK  ] Outputs.MedianAndMedianTable (0.0 ms)
+[ RUN  ] Outputs.PixelStatsCsvHasTwoRowsPerPixel
+[  OK  ] Outputs.PixelStatsCsvHasTwoRowsPerPixel (0.0 ms)
+[ RUN  ] Outputs.QuickDiffPriorityAndColours
+[  OK  ] Outputs.QuickDiffPriorityAndColours (0.0 ms)
+[ RUN  ] Outputs.ResultManifestContent
+[  OK  ] Outputs.ResultManifestContent (0.0 ms)
+[ RUN  ] Outputs.ResultManifestWriteAndMissingDirectory
+[  OK  ] Outputs.ResultManifestWriteAndMissingDirectory (0.3 ms)
+[ RUN  ] Outputs.SamplePixelsPreferConfirmedLossesAndAreDeterministic
+[  OK  ] Outputs.SamplePixelsPreferConfirmedLossesAndAreDeterministic (0.0 ms)
+[ RUN  ] Outputs.SamplePixelsShortageIsMadeUpByTheOtherSide
+[  OK  ] Outputs.SamplePixelsShortageIsMadeUpByTheOtherSide (0.0 ms)
+[ RUN  ] Outputs.TrajectoriesCsvColumns
+[  OK  ] Outputs.TrajectoriesCsvColumns (0.0 ms)
+[ RUN  ] Outputs.WritePngProducesPngFile
+[  OK  ] Outputs.WritePngProducesPngFile (0.2 ms)
+[ RUN  ] PixelModel.AllTrainingObservationsOnOneDateIsSingular
+[  OK  ] PixelModel.AllTrainingObservationsOnOneDateIsSingular (0.0 ms)
+[ RUN  ] PixelModel.AlternatingSignExceedancesDoNotBreak
+[  OK  ] PixelModel.AlternatingSignExceedancesDoNotBreak (0.0 ms)
+[ RUN  ] PixelModel.BreakAtLastPossibleIndex
+[  OK  ] PixelModel.BreakAtLastPossibleIndex (0.1 ms)
+[ RUN  ] PixelModel.CholeskyFailsOnSingularSystems
+[  OK  ] PixelModel.CholeskyFailsOnSingularSystems (0.0 ms)
+[ RUN  ] PixelModel.CholeskyKnownSystem
+[  OK  ] PixelModel.CholeskyKnownSystem (0.0 ms)
+[ RUN  ] PixelModel.CleanStepIsDetected
+[  OK  ] PixelModel.CleanStepIsDetected (0.0 ms)
+[ RUN  ] PixelModel.ClusteredTrainingDatesGiveSameStatusInBothPrecisions
+[  OK  ] PixelModel.ClusteredTrainingDatesGiveSameStatusInBothPrecisions (0.0 ms)
+[ RUN  ] PixelModel.ComputeNdvi
+[  OK  ] PixelModel.ComputeNdvi (0.0 ms)
+[ RUN  ] PixelModel.ConsecutiveParameterIsHonoured
+[  OK  ] PixelModel.ConsecutiveParameterIsHonoured (0.0 ms)
+[ RUN  ] PixelModel.DesignRowValues
+[  OK  ] PixelModel.DesignRowValues (0.0 ms)
+[ RUN  ] PixelModel.DesignTableHoldsOrExtrapolatesTrend
+[  OK  ] PixelModel.DesignTableHoldsOrExtrapolatesTrend (0.0 ms)
+[ RUN  ] PixelModel.DesignTableMatchesRows
+[  OK  ] PixelModel.DesignTableMatchesRows (0.0 ms)
+[ RUN  ] PixelModel.ExactDataRecoveryDouble
+[  OK  ] PixelModel.ExactDataRecoveryDouble (0.0 ms)
+[ RUN  ] PixelModel.ExactDataRecoveryFloat
+[  OK  ] PixelModel.ExactDataRecoveryFloat (0.0 ms)
+[ RUN  ] PixelModel.FitAndDetectEqualsFitThenDetect
+[  OK  ] PixelModel.FitAndDetectEqualsFitThenDetect (28.4 ms)
+[ RUN  ] PixelModel.InvalidFirstObservationOfRunMovesBreak
+[  OK  ] PixelModel.InvalidFirstObservationOfRunMovesBreak (0.0 ms)
+[ RUN  ] PixelModel.InvalidObservationsDoNotResetRun
+[  OK  ] PixelModel.InvalidObservationsDoNotResetRun (0.0 ms)
+[ RUN  ] PixelModel.LossesOnlyIgnoresPositiveStep
+[  OK  ] PixelModel.LossesOnlyIgnoresPositiveStep (0.0 ms)
+[ RUN  ] PixelModel.MinimumTrainingObservationsIsInclusive
+[  OK  ] PixelModel.MinimumTrainingObservationsIsInclusive (0.0 ms)
+[ RUN  ] PixelModel.NdviArraySeriesStride
+[  OK  ] PixelModel.NdviArraySeriesStride (0.0 ms)
+[ RUN  ] PixelModel.NonExceedanceResetsRun
+[  OK  ] PixelModel.NonExceedanceResetsRun (0.0 ms)
+[ RUN  ] PixelModel.PositiveStepHasPositiveMagnitude
+[  OK  ] PixelModel.PositiveStepHasPositiveMagnitude (0.0 ms)
+[ RUN  ] PixelModel.PredictNdviIsDotProduct
+[  OK  ] PixelModel.PredictNdviIsDotProduct (0.0 ms)
+[ RUN  ] PixelModel.QuickDiffFlags
+[  OK  ] PixelModel.QuickDiffFlags (0.0 ms)
+[ RUN  ] PixelModel.RawSeriesMatchesComputeNdvi
+[  OK  ] PixelModel.RawSeriesMatchesComputeNdvi (0.0 ms)
+[ RUN  ] PixelModel.RidgeShrinksButKeepsFit
+[  OK  ] PixelModel.RidgeShrinksButKeepsFit (0.0 ms)
+[ RUN  ] PixelModel.SignChangeStartsNewRun
+[  OK  ] PixelModel.SignChangeStartsNewRun (0.0 ms)
+[ RUN  ] PixelModel.ThresholdBoundaryIsExclusive
+[  OK  ] PixelModel.ThresholdBoundaryIsExclusive (0.0 ms)
+[ RUN  ] PixelModel.TooFewTrainingObservations
+[  OK  ] PixelModel.TooFewTrainingObservations (0.0 ms)
+[ RUN  ] Postprocess.CleanupDoesNotCountInsufficientDataAsBreak
+[  OK  ] Postprocess.CleanupDoesNotCountInsufficientDataAsBreak (0.0 ms)
+[ RUN  ] Postprocess.CleanupEvaluatesOnTheUnmodifiedInput
+[  OK  ] Postprocess.CleanupEvaluatesOnTheUnmodifiedInput (0.0 ms)
+[ RUN  ] Postprocess.CleanupHandlesCornersAndEdges
+[  OK  ] Postprocess.CleanupHandlesCornersAndEdges (0.0 ms)
+[ RUN  ] Postprocess.CleanupRejectsBadInput
+[  OK  ] Postprocess.CleanupRejectsBadInput (0.0 ms)
+[ RUN  ] Postprocess.CleanupRemovesIsolatedPixelsAndKeepsClusters
+[  OK  ] Postprocess.CleanupRemovesIsolatedPixelsAndKeepsClusters (0.0 ms)
+[ RUN  ] Postprocess.ColorizeKnownPixels
+[  OK  ] Postprocess.ColorizeKnownPixels (0.0 ms)
+[ RUN  ] Postprocess.ColorizeMatchesChangeColorForEveryBreakDate
+[  OK  ] Postprocess.ColorizeMatchesChangeColorForEveryBreakDate (0.0 ms)
+[ RUN  ] Postprocess.ColorizeRejectsBadInput
+[  OK  ] Postprocess.ColorizeRejectsBadInput (0.0 ms)
+[ RUN  ] Postprocess.QuickDiffFlags
+[  OK  ] Postprocess.QuickDiffFlags (0.0 ms)
+[ RUN  ] Postprocess.QuickDiffIndependentOfTileRows
+[  OK  ] Postprocess.QuickDiffIndependentOfTileRows (0.0 ms)
+[ RUN  ] Postprocess.QuickDiffLossesOnlyAndDateOrder
+[  OK  ] Postprocess.QuickDiffLossesOnlyAndDateOrder (0.0 ms)
+[ RUN  ] Postprocess.QuickDiffRejectsBadInput
+[  OK  ] Postprocess.QuickDiffRejectsBadInput (0.0 ms)
+[ RUN  ] Status.OkAndError
+[  OK  ] Status.OkAndError (0.0 ms)
+[ RUN  ] Synthetic.CleanNdviReproducesSeasonalModel
+[  OK  ] Synthetic.CleanNdviReproducesSeasonalModel (247.0 ms)
+[ RUN  ] Synthetic.CloudsAreBright
+[  OK  ] Synthetic.CloudsAreBright (6.3 ms)
+[ RUN  ] Synthetic.ComputeRecoveryCases
+[  OK  ] Synthetic.ComputeRecoveryCases (0.0 ms)
+[ RUN  ] Synthetic.DatesAndOffsetsFollowTheRules
+[  OK  ] Synthetic.DatesAndOffsetsFollowTheRules (11.8 ms)
+[ RUN  ] Synthetic.DiskPathMatchesMemoryPath
+[  OK  ] Synthetic.DiskPathMatchesMemoryPath (9.6 ms)
+[ RUN  ] Synthetic.FractionsOfBreaksCloudsAndNodata
+[  OK  ] Synthetic.FractionsOfBreaksCloudsAndNodata (98.9 ms)
+[ RUN  ] Synthetic.IsIdenticalForAnyThreadCount
+[  OK  ] Synthetic.IsIdenticalForAnyThreadCount (17.5 ms)
+[ RUN  ] Synthetic.RejectsBadOptions
+[  OK  ] Synthetic.RejectsBadOptions (0.3 ms)
+[ RUN  ] Synthetic.TruthLiesInMonitoringWindowWithDatesToSpare
+[  OK  ] Synthetic.TruthLiesInMonitoringWindowWithDatesToSpare (22.1 ms)
+[ RUN  ] SystemInfo.BasicFields
+[  OK  ] SystemInfo.BasicFields (3.9 ms)
+[ RUN  ] Tile.ClampsToImageAndRoundsToEight
+[  OK  ] Tile.ClampsToImageAndRoundsToEight (0.0 ms)
+[ RUN  ] Tile.InputCapLimitsRows
+[  OK  ] Tile.InputCapLimitsRows (0.0 ms)
+[ RUN  ] Tile.MemoryLimitUsesHalfOfFreeMemoryForAllSlots
+[  OK  ] Tile.MemoryLimitUsesHalfOfFreeMemoryForAllSlots (0.0 ms)
+[ RUN  ] Tile.RangesCoverEveryRowOnce
+[  OK  ] Tile.RangesCoverEveryRowOnce (0.0 ms)
+[ RUN  ] Tile.RequestedRowsAreReducedToHalfOfFreeMemory
+[  OK  ] Tile.RequestedRowsAreReducedToHalfOfFreeMemory (0.0 ms)
+[ RUN  ] Tile.RequestedRowsWinAndAreClamped
+[  OK  ] Tile.RequestedRowsWinAndAreClamped (0.0 ms)
+[ RUN  ] Types.AllocateResult
+[  OK  ] Types.AllocateResult (0.0 ms)
+[ RUN  ] Types.BackendNamesRoundTrip
+[  OK  ] Types.BackendNamesRoundTrip (0.0 ms)
+[ RUN  ] Types.BuildDateTableErrors
+[  OK  ] Types.BuildDateTableErrors (0.0 ms)
+[ RUN  ] Types.BuildDateTableMonthly
+[  OK  ] Types.BuildDateTableMonthly (0.0 ms)
+[ RUN  ] Types.IsGpuBackend
+[  OK  ] Types.IsGpuBackend (0.0 ms)
+[ RUN  ] Types.NumParams
+[  OK  ] Types.NumParams (0.0 ms)
+[ RUN  ] Types.ResolveModelParamsAutoMinObs
+[  OK  ] Types.ResolveModelParamsAutoMinObs (0.0 ms)
+[ RUN  ] Types.ResolveModelParamsErrors
+[  OK  ] Types.ResolveModelParamsErrors (0.0 ms)
+[ RUN  ] Types.StageTimingsDefaultsAreNotApplicable
+[  OK  ] Types.StageTimingsDefaultsAreNotApplicable (0.0 ms)
+[ RUN  ] Validation.BreakIndexOutOfRangeIsAnError
+[  OK  ] Validation.BreakIndexOutOfRangeIsAnError (0.0 ms)
+[ RUN  ] Validation.HandMadeFourByFourCounts
+[  OK  ] Validation.HandMadeFourByFourCounts (0.0 ms)
+[ RUN  ] Validation.LineAndCsvText
+[  OK  ] Validation.LineAndCsvText (0.0 ms)
+[ RUN  ] Validation.MetricsEdgeCasesNeverNaN
+[  OK  ] Validation.MetricsEdgeCasesNeverNaN (0.0 ms)
+[ RUN  ] Validation.MetricsOfHandMadeCase
+[  OK  ] Validation.MetricsOfHandMadeCase (0.0 ms)
+[ RUN  ] Validation.SizeMismatchIsAnError
+[  OK  ] Validation.SizeMismatchIsAnError (0.0 ms)
+[ RUN  ] Validation.WindowFromDateTable
+[  OK  ] Validation.WindowFromDateTable (0.0 ms)
+[ RUN  ] ValidationRules.Excluded
+[  OK  ] ValidationRules.Excluded (0.0 ms)
+[ RUN  ] ValidationRules.FalsePositiveAndNegatives
+[  OK  ] ValidationRules.FalsePositiveAndNegatives (0.0 ms)
+[ RUN  ] ValidationRules.GainsDoNotCountAsDetections
+[  OK  ] ValidationRules.GainsDoNotCountAsDetections (0.0 ms)
+[ RUN  ] ValidationRules.TruePositiveWithYearAgreement
+[  OK  ] ValidationRules.TruePositiveWithYearAgreement (0.0 ms)
+[ RUN  ] ValidationRules.WindowLimitsBothSides
+[  OK  ] ValidationRules.WindowLimitsBothSides (0.0 ms)
+PASS (187 tests)

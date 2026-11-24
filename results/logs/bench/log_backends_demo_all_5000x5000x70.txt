@@ -1,0 +1,52 @@
+=== change_detect 1.0 ===
+command: bin/change_detect --mode benchmark --input data/cubes/chaco_demo5000/manifest.txt --backend all --warmup 1 --repeat 5 --compare-to cpu --quiet --run-id backends_demo_20261124T010505 --benchmark-csv out/bench/csv/benchmark_backends_demo.csv --output-dir out/bench/work --log-file out/bench/logs/log_backends_demo_all_5000x5000x70.txt
+start_time: 2026-11-24T01:05:05
+git_commit: 8fd110a
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_demo5000 (data/cubes/chaco_demo5000/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 5000 x 5000
+pixels: 25000000
+pixel time series: 25000000
+samples (pixel-dates): 1750000000
+input bytes: 8.75 GB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 25) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 5 | warmup 1 | csv out/bench/csv/benchmark_backends_demo.csv
+bench: gpu repeat 1/5 backend_total 1039.611 ms kernel_total 46.708 ms
+bench: gpu repeat 2/5 backend_total 1032.504 ms kernel_total 50.302 ms
+bench: gpu repeat 3/5 backend_total 1244.587 ms kernel_total 53.179 ms
+bench: gpu repeat 4/5 backend_total 1075.633 ms kernel_total 50.416 ms
+bench: gpu repeat 5/5 backend_total 1239.269 ms kernel_total 53.241 ms
+bench: gpu-unfused repeat 1/5 backend_total 1049.816 ms kernel_total 104.322 ms
+bench: gpu-unfused repeat 2/5 backend_total 1078.208 ms kernel_total 104.332 ms
+bench: gpu-unfused repeat 3/5 backend_total 1001.154 ms kernel_total 103.814 ms
+bench: gpu-unfused repeat 4/5 backend_total 1009.399 ms kernel_total 103.927 ms
+bench: gpu-unfused repeat 5/5 backend_total 992.254 ms kernel_total 103.717 ms
+bench: cpu repeat 1/5 backend_total 22194.819 ms kernel_total 22110.426 ms
+bench: cpu repeat 2/5 backend_total 20601.601 ms kernel_total 20544.461 ms
+bench: cpu repeat 3/5 backend_total 20208.612 ms kernel_total 20159.987 ms
+bench: cpu repeat 4/5 backend_total 21102.010 ms kernel_total 21049.005 ms
+bench: cpu repeat 5/5 backend_total 21325.305 ms kernel_total 21279.800 ms
+bench: cpu-fp32 repeat 1/5 backend_total 18449.763 ms kernel_total 18402.301 ms
+bench: cpu-fp32 repeat 2/5 backend_total 18424.367 ms kernel_total 18378.227 ms
+bench: cpu-fp32 repeat 3/5 backend_total 18600.425 ms kernel_total 18554.378 ms
+bench: cpu-fp32 repeat 4/5 backend_total 19825.594 ms kernel_total 19775.435 ms
+bench: cpu-fp32 repeat 5/5 backend_total 19376.359 ms kernel_total 19326.921 ms
+bench: cpu-mt repeat 1/5 backend_total 2072.472 ms kernel_total 2033.851 ms
+bench: cpu-mt repeat 2/5 backend_total 2137.151 ms kernel_total 2097.123 ms
+bench: cpu-mt repeat 3/5 backend_total 2288.717 ms kernel_total 2247.417 ms
+bench: cpu-mt repeat 4/5 backend_total 2161.747 ms kernel_total 2119.762 ms
+bench: cpu-mt repeat 5/5 backend_total 2109.976 ms kernel_total 2068.969 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+gpu | 1075.633 | 1032.504 | 1244.587 | 50.416 | 1.99x
+gpu-unfused | 1009.399 | 992.254 | 1078.208 | 103.927 | 2.12x
+cpu | 21102.010 | 20208.612 | 22194.819 | 21049.005 | 0.10x
+cpu-fp32 | 18600.425 | 18424.367 | 19825.594 | 18554.378 | 0.11x
+cpu-mt | 2137.151 | 2072.472 | 2288.717 | 2097.123 | 1.00x
+benchmark_csv: out/bench/csv/benchmark_backends_demo.csv
+SUMMARY: processed 25000000 pixel time series (1750000000 samples) in 1.076 seconds (backend gpu)

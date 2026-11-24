@@ -1,0 +1,4 @@
+a,b,pixels,break_index_differ,status_differ,differ_fraction,either_differ,magnitude_max_abs_diff
+full_gpu,full_cpu,120560400,6,5,4.977e-08,6,7.749e-07
+full_gpu,full_cpu-mt,120560400,9,5,7.465e-08,9,6.855e-07
+full_cpu-mt,full_cpu,120560400,9,4,7.465e-08,9,7.749e-07

@@ -1,0 +1,55 @@
+=== change_detect 1.0 ===
+command: ./bin/change_detect --input data/cubes/chaco_dev2048/manifest.txt --backend gpu --losses-only --compare-to cpu --save-coefficients --output-dir out/dev_gpu --log-file out/dev_gpu/log_detect_gpu_2048x2048x70_dev.txt
+start_time: 2026-11-24T01:04:27
+git_commit: 8fd110a
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_dev2048 (data/cubes/chaco_dev2048/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 2048 x 2048
+pixels: 4194304
+pixel time series: 4194304
+samples (pixel-dates): 293601280
+input bytes: 1.47 GB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 25) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: yes | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: gpu (fused kernel) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 88 | tiles: 24 | tile_input_bytes: 63078400
+gpu_memory: allocated 200 MiB in 156 ms (pinned host buffers included); cudaMemGetInfo used delta 224 MiB
+[tile 1/24] rows 0..87
+[tile 2/24] rows 88..175
+[tile 3/24] rows 176..263
+[tile 4/24] rows 264..351
+[tile 5/24] rows 352..439
+[tile 6/24] rows 440..527
+[tile 7/24] rows 528..615
+[tile 8/24] rows 616..703
+[tile 9/24] rows 704..791
+[tile 10/24] rows 792..879
+[tile 11/24] rows 880..967
+[tile 12/24] rows 968..1055
+[tile 13/24] rows 1056..1143
+[tile 14/24] rows 1144..1231
+[tile 15/24] rows 1232..1319
+[tile 16/24] rows 1320..1407
+[tile 17/24] rows 1408..1495
+[tile 18/24] rows 1496..1583
+[tile 19/24] rows 1584..1671
+[tile 20/24] rows 1672..1759
+[tile 21/24] rows 1760..1847
+[tile 22/24] rows 1848..1935
+[tile 23/24] rows 1936..2023
+[tile 24/24] rows 2024..2047
+--- timings (ms) ---
+read_input: 376.085 | read_gbps: 3.90 | read_wait: - | setup: 195.029 | h2d: 120.536 | ndvi: - | fit: - | detect: - | fused: 9.215 | d2h: 12.341 | kernel_total: 10.116 | backend_total: 629.530 | post: 26.081 | write_outputs: 323.401 | wall_total: 993.652
+throughput: 466.4 Msamples/s | kernel_throughput: 29024.3 Msamples/s
+device_memory_peak: 200 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 3745612 (89.30%) | break: 448648 (10.70%) [loss 448648, gain 0] | insufficient_data: 44 (0.00%)
+reference: data/cubes/chaco_dev2048/reference_lossyear.u8
+validation: precision 0.968 | recall 0.852 | f1 0.906 | year_exact 0.901 | year_within1 0.994 (tp 418436 fp 13846 fn 72830)
+agreement_vs_cpu: identical_break_index 1.0000 | identical_status 1.0000 | max_coef_diff 5.4e-07
+outputs: out/dev_gpu
+SUMMARY: processed 4194304 pixel time series (293601280 samples) in 0.994 seconds (backend gpu)

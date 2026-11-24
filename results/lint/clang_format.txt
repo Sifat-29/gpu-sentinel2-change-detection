@@ -1,0 +1,2 @@
+# clang-format --style=file --dry-run --Werror (66 files)
+clang-format check exit status: 0

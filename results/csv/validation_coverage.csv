@@ -1,0 +1,4 @@
+run,pixels,eligible_pixels,reference_positive,reference_positive_share_of_eligible,detected,detected_scored,detected_unscored,unscored_fraction,tp,fp,precision_scored,precision_unscored_as_fp
+full_gpu,120560400,43490117,3148725,0.0724,4082473,3204686,877787,0.2150,2592423,612263,0.8089,0.6350
+demo_gpu,25000000,9815563,1728576,0.1761,1976111,1741743,234368,0.1186,1454330,287413,0.8350,0.7360
+dev_gpu,4194304,2494648,491266,0.1969,448648,432282,16366,0.0365,418436,13846,0.9680,0.9327

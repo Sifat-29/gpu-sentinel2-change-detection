@@ -1,0 +1,28 @@
+=== change_detect 1.0 ===
+command: bin/change_detect --mode benchmark --input data/cubes/chaco_demo5000/manifest.txt --backend gpu --warmup 1 --repeat 5 --tile-rows 256 --quiet --run-id tiles_20261124T011900 --benchmark-csv out/bench/csv/benchmark_tiles.csv --output-dir out/bench/work --log-file out/bench/logs/log_tiles_gpu_5000x5000x70_tile256.txt
+start_time: 2026-11-24T01:19:46
+git_commit: 8fd110a
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_demo5000 (data/cubes/chaco_demo5000/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 5000 x 5000
+pixels: 25000000
+pixel time series: 25000000
+samples (pixel-dates): 1750000000
+input bytes: 8.75 GB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 25) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 5 | warmup 1 | csv out/bench/csv/benchmark_tiles.csv
+bench: gpu repeat 1/5 backend_total 2352.916 ms kernel_total 43.499 ms
+bench: gpu repeat 2/5 backend_total 2257.124 ms kernel_total 43.674 ms
+bench: gpu repeat 3/5 backend_total 1433.907 ms kernel_total 41.606 ms
+bench: gpu repeat 4/5 backend_total 1606.466 ms kernel_total 41.038 ms
+bench: gpu repeat 5/5 backend_total 2426.794 ms kernel_total 43.707 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+gpu | 2257.124 | 1433.907 | 2426.794 | 43.499 | -
+benchmark_csv: out/bench/csv/benchmark_tiles.csv
+SUMMARY: processed 25000000 pixel time series (1750000000 samples) in 2.257 seconds (backend gpu)

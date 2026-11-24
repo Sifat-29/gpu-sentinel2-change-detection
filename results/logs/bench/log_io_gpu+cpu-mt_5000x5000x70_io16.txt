@@ -1,0 +1,34 @@
+=== change_detect 1.0 ===
+command: bin/change_detect --mode benchmark --input data/cubes/chaco_demo5000/manifest.txt --backend gpu,cpu-mt --warmup 1 --repeat 5 --io-threads 16 --quiet --run-id io_20261124T012149 --benchmark-csv out/bench/csv/benchmark_io.csv --output-dir out/bench/work --log-file out/bench/logs/log_io_gpu+cpu-mt_5000x5000x70_io16.txt
+start_time: 2026-11-24T01:23:39
+git_commit: 8fd110a
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_demo5000 (data/cubes/chaco_demo5000/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 5000 x 5000
+pixels: 25000000
+pixel time series: 25000000
+samples (pixel-dates): 1750000000
+input bytes: 8.75 GB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 25) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 5 | warmup 1 | csv out/bench/csv/benchmark_io.csv
+bench: gpu repeat 1/5 backend_total 983.566 ms kernel_total 50.347 ms
+bench: gpu repeat 2/5 backend_total 983.192 ms kernel_total 50.497 ms
+bench: gpu repeat 3/5 backend_total 959.742 ms kernel_total 50.301 ms
+bench: gpu repeat 4/5 backend_total 957.990 ms kernel_total 50.309 ms
+bench: gpu repeat 5/5 backend_total 973.845 ms kernel_total 50.396 ms
+bench: cpu-mt repeat 1/5 backend_total 1961.589 ms kernel_total 1925.502 ms
+bench: cpu-mt repeat 2/5 backend_total 1993.798 ms kernel_total 1956.950 ms
+bench: cpu-mt repeat 3/5 backend_total 2082.350 ms kernel_total 2045.520 ms
+bench: cpu-mt repeat 4/5 backend_total 2155.770 ms kernel_total 2119.919 ms
+bench: cpu-mt repeat 5/5 backend_total 2069.556 ms kernel_total 2031.661 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+gpu | 973.845 | 957.990 | 983.566 | 50.347 | 2.13x
+cpu-mt | 2069.556 | 1961.589 | 2155.770 | 2031.661 | 1.00x
+benchmark_csv: out/bench/csv/benchmark_io.csv
+SUMMARY: processed 25000000 pixel time series (1750000000 samples) in 0.974 seconds (backend gpu)

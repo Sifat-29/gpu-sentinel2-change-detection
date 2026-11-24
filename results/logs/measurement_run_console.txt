@@ -1,0 +1,43 @@
+[00:57:32] commit 8fd110a status: 0 changed files
+3 %, 194 MiB, 210 MHz, 4.61 W, P8
+AC online: 1
+ 00:57:37 up  7:34,  1 user,  load average: 0.76, 1.36, 1.43
+[00:57:37] START step 1
+build rc=0
+SMOKE: PASS
+PASS (180 tests)
+PASS (157 tests)
+LINT: PASS
+[01:00:26] START ./bin/change_detect --input data/cubes/chaco_full/manifest.txt --backend gpu --losses-only --compare-to cpu --output-dir out/full_gpu --log-file out/full_gpu/log_detect_gpu_10980x10980x70_full.txt
+[01:02:17] END rc=0
+[01:02:17] START ./bin/change_detect --input data/cubes/chaco_full/manifest.txt --backend cpu-mt --losses-only --output-dir out/full_cpu-mt --log-file out/full_cpu-mt/log_detect_cpu-mt_10980x10980x70_full.txt
+[01:02:33] END rc=0
+[01:02:33] START ./bin/change_detect --input data/cubes/chaco_full/manifest.txt --backend cpu --losses-only --output-dir out/full_cpu --log-file out/full_cpu/log_detect_cpu_10980x10980x70_full.txt
+[01:04:18] END rc=0
+[01:04:18] START ./bin/change_detect --input data/cubes/chaco_demo5000/manifest.txt --backend gpu --losses-only --compare-to cpu-mt --output-dir out/demo_gpu --log-file out/demo_gpu/log_detect_gpu_5000x5000x70_demo.txt
+[01:04:27] END rc=0
+[01:04:27] START ./bin/change_detect --input data/cubes/chaco_dev2048/manifest.txt --backend gpu --losses-only --compare-to cpu --save-coefficients --output-dir out/dev_gpu --log-file out/dev_gpu/log_detect_gpu_2048x2048x70_dev.txt
+[01:04:35] END rc=0
+[01:04:35] START ./bin/change_detect --input data/sample/manifest.txt --backend gpu --losses-only --output-dir out/sample_gpu --log-file out/sample_gpu/log_detect_gpu_128x128x70_sample.txt
+[01:04:41] END rc=0
+[01:04:41] START ./bin/change_detect --mode quick-diff --input data/cubes/chaco_dev2048/manifest.txt --backend gpu --losses-only --output-dir out/dev_quickdiff --log-file out/dev_quickdiff/log_quick-diff_gpu_2048x2048x70_dev.txt
+[01:04:44] END rc=0
+[01:04:44] START ./bin/change_detect --input data/cubes/chaco_demo5000/manifest.txt --backend gpu --losses-only --streams 3 --trace-csv out/timeline/s3.csv --output-dir out/timeline/o3 --quiet
+[01:04:51] END rc=0
+[01:04:51] START ./bin/change_detect --input data/cubes/chaco_demo5000/manifest.txt --backend gpu --losses-only --streams 1 --trace-csv out/timeline/s1.csv --output-dir out/timeline/o1 --quiet
+[01:04:56] END rc=0
+[01:04:56] START .venv/bin/python scripts/plot_timeline.py --trace out/timeline/s3.csv --trace out/timeline/s1.csv --labels 3 streams 1 stream --out out/timeline/pipeline_timeline_measured.png
+[01:04:58] END rc=0
+[01:04:58] ALL DONE
+[01:04:58] START step 6 benchmarks
+benchmarks rc=0
+check out/bench/csv/benchmark_backends_demo.csv: CSV: PASS (25 rows, 5 configurations)
+check out/bench/csv/benchmark_backends_full.csv: CSV: PASS (17 rows, 5 configurations)
+check out/bench/csv/benchmark_blocks.csv: CSV: PASS (40 rows, 8 configurations)
+check out/bench/csv/benchmark_io.csv: CSV: PASS (50 rows, 10 configurations)
+check out/bench/csv/benchmark_scaling_dates.csv: CSV: PASS (50 rows, 10 configurations)
+check out/bench/csv/benchmark_scaling_pixels.csv: CSV: PASS (40 rows, 8 configurations)
+check out/bench/csv/benchmark_streams.csv: CSV: PASS (20 rows, 4 configurations)
+check out/bench/csv/benchmark_tiles.csv: CSV: PASS (35 rows, 6 configurations)
+plot rc=0
+[01:26:02] M-01 ALL DONE

@@ -1,0 +1,29 @@
+=== change_detect 1.0 ===
+command: ./bin/change_detect --input data/cubes/chaco_demo5000/manifest.txt --backend gpu --losses-only --trend extrapolate --threshold 3 --consecutive 3 --output-dir out/demo_extrapolate --log-file out/demo_extrapolate/log_detect_gpu_5000x5000x70_demo_brief_defaults_extrapolate.txt --quiet
+start_time: 2026-11-24T01:28:45
+git_commit: cfb0fd0
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_demo5000 (data/cubes/chaco_demo5000/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 5000 x 5000
+pixels: 25000000
+pixel time series: 25000000
+samples (pixel-dates): 1750000000
+input bytes: 8.75 GB
+--- parameters ---
+harmonics: 2 (p = 6) | trend: extrapolate | train_years: 2.0 (train dates: 25) | min_train_obs: 18 | threshold: 3.0 | consecutive: 3 | rmse_floor: 0.02 | ridge: 0 | losses_only: yes | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: gpu (fused kernel) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 32 | tiles: 157 | tile_input_bytes: 56000000
+--- timings (ms) ---
+read_input: 534.568 | read_gbps: 16.37 | read_wait: - | setup: 287.539 | h2d: 706.652 | ndvi: - | fit: - | detect: - | fused: 52.804 | d2h: 26.993 | kernel_total: 55.965 | backend_total: 1138.835 | post: 26.537 | write_outputs: 462.121 | wall_total: 1733.848
+throughput: 1536.7 Msamples/s | kernel_throughput: 31269.5 Msamples/s
+device_memory_peak: 167 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 23286843 (93.15%) | break: 1711089 (6.84%) [loss 1711089, gain 0] | insufficient_data: 2068 (0.01%)
+reference: data/cubes/chaco_demo5000/reference_lossyear.u8
+validation: precision 0.742 | recall 0.607 | f1 0.667 | year_exact 0.871 | year_within1 0.990 (tp 1048576 fp 365122 fn 680000)
+outputs: out/demo_extrapolate
+SUMMARY: processed 25000000 pixel time series (1750000000 samples) in 1.734 seconds (backend gpu)

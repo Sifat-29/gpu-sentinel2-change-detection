@@ -1,0 +1,35 @@
+=== change_detect 1.0 ===
+command: bin/change_detect --mode benchmark --input synthetic --synthetic-size 2048x2048x72 --backend gpu,cpu-mt --warmup 1 --repeat 5 --synthetic-years 6 --quiet --run-id scaling_dates_20261124T012720 --benchmark-csv out/bench_dates/csv/benchmark_scaling_dates.csv --output-dir out/bench_dates/work --log-file out/bench_dates/logs/log_scaling_dates_gpu+cpu-mt_2048x2048x72.txt
+start_time: 2026-11-24T01:27:45
+git_commit: cfb0fd0
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_2048x2048x72_seed42 (synthetic)
+scenes (dates) T: 72 [2019-01-01 .. 2024-12-01]
+image size H x W: 2048 x 2048
+pixels: 4194304
+pixel time series: 4194304
+samples (pixel-dates): 301989888
+input bytes: 1.51 GB
+synthetic_generation: 4529.307 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 24) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+benchmark: repeat 5 | warmup 1 | csv out/bench_dates/csv/benchmark_scaling_dates.csv
+bench: gpu repeat 1/5 backend_total 263.359 ms kernel_total 7.654 ms
+bench: gpu repeat 2/5 backend_total 267.362 ms kernel_total 7.655 ms
+bench: gpu repeat 3/5 backend_total 267.437 ms kernel_total 7.707 ms
+bench: gpu repeat 4/5 backend_total 261.277 ms kernel_total 8.518 ms
+bench: gpu repeat 5/5 backend_total 263.645 ms kernel_total 8.559 ms
+bench: cpu-mt repeat 1/5 backend_total 372.358 ms kernel_total 356.238 ms
+bench: cpu-mt repeat 2/5 backend_total 378.725 ms kernel_total 361.303 ms
+bench: cpu-mt repeat 3/5 backend_total 375.234 ms kernel_total 357.532 ms
+bench: cpu-mt repeat 4/5 backend_total 397.943 ms kernel_total 380.739 ms
+bench: cpu-mt repeat 5/5 backend_total 387.444 ms kernel_total 370.254 ms
+--- results ---
+backend | median backend_total ms | min | max | median kernel ms | speedup vs cpu-mt
+gpu | 263.645 | 261.277 | 267.437 | 7.707 | 1.44x
+cpu-mt | 378.725 | 372.358 | 397.943 | 361.303 | 1.00x
+benchmark_csv: out/bench_dates/csv/benchmark_scaling_dates.csv
+SUMMARY: processed 4194304 pixel time series (301989888 samples) in 0.264 seconds (backend gpu)

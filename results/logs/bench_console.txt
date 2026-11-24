@@ -1,0 +1,128 @@
+run_benchmarks: run; sweeps: backends_demo backends_full streams tiles blocks io scaling_dates scaling_pixels; output: out/bench
+hardware record: out/bench/hardware.txt
+== sweep backends_demo ==
+  run: all 5000x5000x70 
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5     1075.633
+gpu-unfused  chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5     1009.399
+cpu          chaco_demo5000                     32     -1      -1      1    8 5000x5000x70     5    21102.010
+cpu-fp32     chaco_demo5000                     32     -1      -1      1    8 5000x5000x70     5    18600.425
+cpu-mt       chaco_demo5000                     32     -1      -1     16    8 5000x5000x70     5     2137.151
+CSV: PASS (25 rows, 5 configurations)
+sweep backends_demo: 289 s
+== sweep backends_full ==
+  run: gpu+gpu-unfused+cpu-mt 10980x10980x70 
+  run: cpu-fp32 10980x10980x70 single_run
+  run: cpu 10980x10980x70 single_run
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_full                         16      3     256     -1    8 10980x10980x70     5     9045.735
+gpu-unfused  chaco_full                         16      3     256     -1    8 10980x10980x70     5     8844.141
+cpu-mt       chaco_full                         16     -1      -1     16    8 10980x10980x70     5    11858.269
+cpu-fp32     chaco_full                         16     -1      -1      1    8 10980x10980x70     1    90498.738
+cpu          chaco_full                         16     -1      -1      1    8 10980x10980x70     1    91710.304
+CSV: PASS (17 rows, 5 configurations)
+sweep backends_full: 372 s
+== sweep streams ==
+  run: gpu 5000x5000x70 streams1
+  run: gpu 5000x5000x70 streams3
+  run: gpu 10980x10980x70 streams1
+  run: gpu 10980x10980x70 streams3
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_demo5000                     32      1     256     -1    8 5000x5000x70     5     1540.411
+gpu          chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5     1258.046
+gpu          chaco_full                         16      1     256     -1    8 10980x10980x70     5    13682.588
+gpu          chaco_full                         16      3     256     -1    8 10980x10980x70     5     8858.246
+CSV: PASS (20 rows, 4 configurations)
+sweep streams: 174 s
+== sweep tiles ==
+  run: gpu 5000x5000x70 tile16
+  run: gpu 5000x5000x70 tile32
+  run: gpu 5000x5000x70 tile64
+  run: gpu 5000x5000x70 tile128
+  run: gpu 5000x5000x70 tile256
+  run: gpu 5000x5000x70 tile512
+  run: gpu 5000x5000x70 tile_auto
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_demo5000                     16      3     256     -1    8 5000x5000x70     5      983.921
+gpu          chaco_demo5000                     32      3     256     -1    8 5000x5000x70    10     1033.965
+gpu          chaco_demo5000                     64      3     256     -1    8 5000x5000x70     5     1111.230
+gpu          chaco_demo5000                    128      3     256     -1    8 5000x5000x70     5     1307.488
+gpu          chaco_demo5000                    256      3     256     -1    8 5000x5000x70     5     2257.124
+gpu          chaco_demo5000                    512      3     256     -1    8 5000x5000x70     5     3613.149
+CSV: PASS (35 rows, 6 configurations)
+sweep tiles: 96 s
+== sweep blocks ==
+  run: gpu 5000x5000x70 block64
+  run: gpu 5000x5000x70 block128
+  run: gpu 5000x5000x70 block256
+  run: gpu 5000x5000x70 block512
+  run: gpu-unfused 5000x5000x70 block64
+  run: gpu-unfused 5000x5000x70 block128
+  run: gpu-unfused 5000x5000x70 block256
+  run: gpu-unfused 5000x5000x70 block512
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_demo5000                     32      3      64     -1    8 5000x5000x70     5      977.892
+gpu          chaco_demo5000                     32      3     128     -1    8 5000x5000x70     5      977.791
+gpu          chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5      967.760
+gpu          chaco_demo5000                     32      3     512     -1    8 5000x5000x70     5      954.046
+gpu-unfused  chaco_demo5000                     32      3      64     -1    8 5000x5000x70     5      993.916
+gpu-unfused  chaco_demo5000                     32      3     128     -1    8 5000x5000x70     5      996.358
+gpu-unfused  chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5      994.824
+gpu-unfused  chaco_demo5000                     32      3     512     -1    8 5000x5000x70     5      977.304
+CSV: PASS (40 rows, 8 configurations)
+sweep blocks: 73 s
+== sweep io ==
+  run: gpu+cpu-mt 5000x5000x70 io1
+  run: gpu+cpu-mt 5000x5000x70 io2
+  run: gpu+cpu-mt 5000x5000x70 io4
+  run: gpu+cpu-mt 5000x5000x70 io8
+  run: gpu+cpu-mt 5000x5000x70 io16
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          chaco_demo5000                     32      3     256     -1    1 5000x5000x70     5     1684.111
+cpu-mt       chaco_demo5000                     32     -1      -1     16    1 5000x5000x70     5     2110.851
+gpu          chaco_demo5000                     32      3     256     -1    2 5000x5000x70     5     1006.828
+cpu-mt       chaco_demo5000                     32     -1      -1     16    2 5000x5000x70     5     2071.534
+gpu          chaco_demo5000                     32      3     256     -1    4 5000x5000x70     5      917.151
+cpu-mt       chaco_demo5000                     32     -1      -1     16    4 5000x5000x70     5     2060.820
+gpu          chaco_demo5000                     32      3     256     -1    8 5000x5000x70     5      923.426
+cpu-mt       chaco_demo5000                     32     -1      -1     16    8 5000x5000x70     5     2055.014
+gpu          chaco_demo5000                     32      3     256     -1   16 5000x5000x70     5      973.845
+cpu-mt       chaco_demo5000                     32     -1      -1     16   16 5000x5000x70     5     2069.556
+CSV: PASS (50 rows, 10 configurations)
+sweep io: 135 s
+== sweep scaling_dates ==
+  run: gpu+cpu-mt 2048x2048x12 
+  run: gpu+cpu-mt 2048x2048x24 
+  run: gpu+cpu-mt 2048x2048x48 
+  run: gpu+cpu-mt 2048x2048x72 
+  run: gpu+cpu-mt 2048x2048x96 
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          synthetic_2048x2048x12_seed42     544      3     256     -1    8 2048x2048x12     5      165.009
+cpu-mt       synthetic_2048x2048x12_seed42     544     -1      -1     16    8 2048x2048x12     5       65.658
+gpu          synthetic_2048x2048x24_seed42     272      3     256     -1    8 2048x2048x24     5      172.656
+cpu-mt       synthetic_2048x2048x24_seed42     272     -1      -1     16    8 2048x2048x24     5      114.209
+gpu          synthetic_2048x2048x48_seed42     136      3     256     -1    8 2048x2048x48     5      227.108
+cpu-mt       synthetic_2048x2048x48_seed42     136     -1      -1     16    8 2048x2048x48     5      289.273
+gpu          synthetic_2048x2048x72_seed42      88      3     256     -1    8 2048x2048x72     5      263.936
+cpu-mt       synthetic_2048x2048x72_seed42      88     -1      -1     16    8 2048x2048x72     5      437.519
+gpu          synthetic_2048x2048x96_seed42      64      3     256     -1    8 2048x2048x96     5      347.240
+cpu-mt       synthetic_2048x2048x96_seed42      64     -1      -1     16    8 2048x2048x96     5      674.530
+CSV: PASS (50 rows, 10 configurations)
+sweep scaling_dates: 54 s
+== sweep scaling_pixels ==
+  run: gpu+cpu-mt 1024x1024x48 
+  run: gpu+cpu-mt 2048x2048x48 
+  run: gpu+cpu-mt 3072x3072x48 
+  run: gpu+cpu-mt 4096x4096x48 
+backend      input                            tile   strm   block   thrd   io    size  rows median_total_ms
+gpu          synthetic_1024x1024x48_seed42     272      3     256     -1    8 1024x1024x48     5      116.774
+cpu-mt       synthetic_1024x1024x48_seed42     272     -1      -1     16    8 1024x1024x48     5       82.441
+gpu          synthetic_2048x2048x48_seed42     136      3     256     -1    8 2048x2048x48     5      209.942
+cpu-mt       synthetic_2048x2048x48_seed42     136     -1      -1     16    8 2048x2048x48     5      289.698
+gpu          synthetic_3072x3072x48_seed42      88      3     256     -1    8 3072x3072x48     5      366.646
+cpu-mt       synthetic_3072x3072x48_seed42      88     -1      -1     16    8 3072x3072x48     5      598.458
+gpu          synthetic_4096x4096x48_seed42      64      3     256     -1    8 4096x4096x48     5      563.488
+cpu-mt       synthetic_4096x4096x48_seed42      64     -1      -1     16    8 4096x4096x48     5     1265.901
+CSV: PASS (40 rows, 8 configurations)
+sweep scaling_pixels: 61 s
+run_benchmarks: all sweeps passed (277 rows); CSVs in out/bench/csv, logs in out/bench/logs

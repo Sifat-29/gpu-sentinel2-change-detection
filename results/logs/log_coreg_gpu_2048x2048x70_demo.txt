@@ -1,0 +1,25 @@
+=== change_detect 1.0 ===
+command: ./bin/change_detect --mode coreg --input data/cubes/chaco_demo5000/manifest.txt --coreg-window 2048 --output-dir out/coreg_demo --log-file out/coreg_demo/log_coreg_gpu_2048x2048x70_demo.txt
+start_time: 2026-11-24T04:57:13
+git_commit: 1003e00
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: chaco_demo5000 (data/cubes/chaco_demo5000/manifest.txt)
+scenes (dates) T: 70 [2019-01-20 .. 2024-12-29]
+image size H x W: 5000 x 5000
+pixels: 25000000
+pixel time series: 25000000
+samples (pixel-dates): 1750000000
+input bytes: 8.75 GB
+--- parameters ---
+coreg_window: 2048 | origin: 1476,1476 (centred) | band: nir | reference_date: auto | valid_classes: 4,5,6 | low_peak_below: 0.020 | large_shift_above_px: 1.00
+--- execution ---
+backend: gpu (cuFFT phase correlation) | window: 2048 x 2048 at row 1476, col 1476 | band: nir | reference_date: 40 (2022-05-04, valid 1.0000) | dates_per_batch: 70
+--- timings (ms) ---
+read_input: 907.508 | setup: 189.039 | h2d: 150.563 | fft: 87.601 | spectrum: 19.330 | peak: 5.501 | d2h: 0.392 | total: 1442.781
+--- results ---
+median_shift_px: 0.1009 | max_shift_px: 0.5077 (date 24, 2021-01-19) | flagged: 0 (low_peak 0, large_shift 0)
+outputs: out/coreg_demo/coreg_shifts.csv
+SUMMARY: processed 70 scenes of 2048 x 2048 pixels (293601280 samples) in 1.443 seconds (backend gpu, cuFFT)

@@ -1,0 +1,13 @@
+metric,value
+tp,418436
+fp,13846
+fn,72830
+tn,1989536
+excluded,1699656
+precision,0.967970
+recall,0.851750
+f1,0.906149
+year_exact,0.901261
+year_within1,0.993562
+first_year,2021
+last_year,2024

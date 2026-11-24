@@ -1,0 +1,31 @@
+=== change_detect 1.0 ===
+command: bin/change_detect --mode detect --input synthetic --synthetic-size 512x512x48 --backend gpu --compare-to cpu --quiet --output-dir out/smoke --log-file out/smoke/log_detect_gpu_512x512x48.txt
+start_time: 2026-11-24T00:59:10
+git_commit: 8fd110a
+--- device ---
+gpu: NVIDIA GeForce RTX 4070 Laptop GPU | cc 8.9 | 36 SMs | 8187 MiB total | 7054 MiB free | driver 13.4 | runtime 12.0
+cpu: Intel(R) Core(TM) i9-14900HX | 16 threads
+--- input ---
+cube: synthetic_512x512x48_seed42 (synthetic)
+scenes (dates) T: 48 [2019-01-01 .. 2022-12-02]
+image size H x W: 512 x 512
+pixels: 262144
+pixel time series: 262144
+samples (pixel-dates): 12582912
+input bytes: 62.91 MB
+synthetic_generation: 248.479 ms (not included in any timing below)
+--- parameters ---
+harmonics: 2 (p = 6) | trend: hold | train_years: 2.0 (train dates: 24) | min_train_obs: 18 | threshold: 3.5 | consecutive: 2 | rmse_floor: 0.02 | ridge: 0 | losses_only: no | valid_classes: 4,5,6 | cleanup: no
+--- execution ---
+backend: gpu (fused kernel) | block_size: 256 | streams: 3 | io_threads: 8 | tile_rows: 512 | tiles: 1 | tile_input_bytes: 62914560
+--- timings (ms) ---
+read_input: 5.897 | read_gbps: 10.67 | read_wait: - | setup: 38.057 | h2d: 4.984 | ndvi: - | fit: - | detect: - | fused: 0.534 | d2h: 0.334 | kernel_total: 0.534 | backend_total: 59.369 | post: 5.424 | write_outputs: 33.653 | wall_total: 103.940
+throughput: 211.9 Msamples/s | kernel_throughput: 23585.4 Msamples/s
+device_memory_peak: 63 MiB (pipeline buffers; CUDA context not included)
+--- results ---
+stable: 174468 (66.55%) | break: 33532 (12.79%) [loss 26057, gain 7475] | insufficient_data: 54144 (20.65%)
+reference: none
+agreement_vs_cpu: identical_break_index 1.0000 | identical_status 1.0000 | max_coef_diff -
+synthetic_recovery: recovered 30492 of 30876 eligible (98.8%) | false_breaks 2643 of 222660 (1.2%)
+outputs: out/smoke
+SUMMARY: processed 262144 pixel time series (12582912 samples) in 0.104 seconds (backend gpu)
