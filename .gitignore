@@ -1,0 +1,23 @@
+# Build outputs
+bin/*
+!bin/.gitkeep
+build/
+*.o
+*.d
+
+# Python environment and caches
+.venv/
+__pycache__/
+
+# Large or generated data (see data/README.md for how to recreate it)
+data/cubes/
+data/staging/
+data/reference/
+
+# Run outputs and the proof bundle
+out/
+proof_of_execution.tar.gz
+
+# Profiler reports
+*.nsys-rep
+*.ncu-rep

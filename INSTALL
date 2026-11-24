@@ -1,0 +1,149 @@
+INSTALL: change_detect
+======================
+
+This file lists the exact toolchain that was used, how to install it on
+Ubuntu/WSL2 (tested), on other Linux distributions and on Windows, and how to
+check the installation with one command. The program is CUDA C++; Python is
+used only for helper scripts (data download, figures, benchmark plots) that
+run on the CPU.
+
+1. Versions used
+----------------
+
+All results in `results/` were produced with these versions.
+
+ * Operating system: Ubuntu 24.04.5 LTS (x86_64) under WSL2 (kernel
+   5.15.167.4-microsoft-standard-WSL2) on Windows.
+ * GPU: NVIDIA GeForce RTX 4070 Laptop GPU, 8 GB, compute capability 8.9
+   (`sm_89`). Windows NVIDIA driver 616.56 (reports CUDA 13.4); the driver
+   provides CUDA inside WSL2.
+ * CUDA toolkit: nvcc 12.0.140, Ubuntu package `nvidia-cuda-toolkit`
+   12.0.1-4build4 (runtime 12.0). It installs to /usr, there is no
+   /usr/local/cuda.
+ * Host compilers: g++ 13.3.0 (the Ubuntu default) and g++ 12.4.0. nvcc 12.0
+   supports gcc up to 12, so the Makefile passes `-ccbin g++-12` to nvcc when
+   g++-12 is installed; the CPU-only code is built with g++ 13.3.
+ * GNU make 4.3, git 2.43.
+ * cuFFT (libcufft 11, part of the CUDA toolkit; the GPU build links it with
+   `-lcufft` for `--mode coreg`).
+ * clang-format 18.1.3 and cpplint 2.0.2 (cpplint is installed into the Python
+   virtual environment) for `make lint`.
+ * Python 3.12.3 for the helper scripts, in a virtual environment `.venv` with
+   the packages pinned in `scripts/requirements.txt`: cpplint 2.0.2, numpy 2.5.5,
+   matplotlib 3.11.2, pillow 13.0.0, rasterio 1.5.2, pystac-client 0.9.1,
+   requests 2.34.2, imageio 2.38.2.
+ * Optional: Nsight Systems 2022.4.2 and Nsight Compute 2022.4.1 (Ubuntu
+   packages). On this machine Nsight Systems records a trace but cannot import
+   it, and the Ubuntu compute-sanitizer does not start; the project does not
+   depend on either.
+ * Not needed: the AWS CLI (the scripts read public cloud-optimised GeoTIFFs
+   over HTTPS), CMake, clang++.
+
+The program needs only the CUDA runtime library. A GPU is required for the GPU
+backends; `make cpu` builds a CPU-only program (no CUDA, no GPU).
+
+2. Ubuntu 24.04 and WSL2 (tested)
+---------------------------------
+
+    sudo apt update
+    sudo apt install build-essential g++-12 make git clang-format \
+        nvidia-cuda-toolkit python3 python3-venv python3-pip
+
+Check the toolchain:
+
+    nvcc --version            # release 12.0
+    g++ --version             # 13.3
+    g++-12 --version          # 12.4
+    clang-format --version    # 18.1
+    nvidia-smi                # lists the GPU and the driver
+
+Create the Python helper environment (creates `.venv`, installs the pinned
+packages including cpplint). It is needed for `make lint`, the figures and
+the data scripts, not for building or running the program:
+
+    bash scripts/setup_python.sh
+
+Build and test (run in the repository root):
+
+    make                      # GPU program: bin/change_detect
+    make cpu                  # CPU-only program: bin/change_detect_cpu
+    make test                 # GPU unit tests, ends with PASS (N tests)
+    make test-cpu             # CPU-only unit tests
+    make lint                 # prints LINT: PASS
+    make smoke                # installation check, prints SMOKE: PASS
+
+How to find CUDA_ARCH. The Makefile reads the compute capability of GPU 0:
+
+    nvidia-smi --query-gpu=compute_cap --format=csv,noheader     # for example 8.9
+
+and uses `sm_` followed by the number without the dot (8.9 gives `sm_89`; 8.6
+gives `sm_86`; 7.5 gives `sm_75`). It falls back to `sm_75` when the query
+fails. Override it with `make gpu CUDA_ARCH=sm_86`.
+
+How to verify: `make smoke` builds the program, runs the unit tests and a small
+synthetic detect run (512 x 512 x 48, no download), checks the log and prints
+one `[PASS]` or `[FAIL]` line per check and finally `SMOKE: PASS` or
+`SMOKE: FAIL`. The full output is saved to `out/smoke/smoke_log.txt`; paste it
+into a bug report if a check fails.
+
+3. Other Linux distributions
+----------------------------
+
+Install the same tools with your package manager: a CUDA toolkit that provides
+nvcc (from NVIDIA's repository or the distribution), a host compiler that your
+nvcc supports (see the CUDA installation guide for your version; for nvcc 12.0
+use gcc 12 or older, for newer toolkits a newer gcc), GNU make, git,
+clang-format 18 and Python 3.10 or newer with the venv module. The NVIDIA
+driver must be installed on the machine. Then run the same make commands. If
+your default g++ is newer than nvcc supports, install an older g++ and call
+
+    make gpu NVCC_CCBIN=g++-12
+
+(or set `NVCC_CCBIN` to the right compiler; set it empty to use nvcc's default).
+This path was not tested; only Ubuntu 24.04 under WSL2 was.
+
+4. Windows (through WSL2)
+-------------------------
+
+Native Windows builds are not supported. Use WSL2 with Ubuntu 24.04:
+
+ 1. Install the current NVIDIA Windows driver; it provides CUDA inside WSL2.
+    Do not install a Linux display driver inside WSL.
+ 2. Install Ubuntu 24.04 for WSL2 and open the Ubuntu shell.
+ 3. Install the packages of section 2 inside Ubuntu.
+ 4. Keep the repository inside the Linux file system (for example under your
+    home directory), not under /mnt/c, for fast builds and file reads.
+
+Notes for WSL2: pinned host memory is slower to allocate than on native Linux
+(the program therefore caps its tile size, see README.md), and WSL2 may let
+`cudaMalloc` exceed the free GPU memory without failing (the program clamps an
+explicit `--tile-rows` to half of the free memory and prints a `note:` line).
+By default WSL2 exposes only part of the CPU threads: on the reference machine
+it shows 16 of 32. The CPU baselines use at most the visible threads.
+
+5. Coursera lab and other GPU environments
+------------------------------------------
+
+The code was not run in the Coursera lab. The same steps should apply if the
+lab image provides nvcc, make and a C++17 compiler. Check `nvcc --version`,
+find `CUDA_ARCH` with the command in section 2 and run `make smoke`. If the
+lab cannot install clang-format or cpplint, skip `make lint`; building and
+running need neither. A GPU with less than 8 GB works: tiles are sized from the
+free GPU memory and `--tile-rows` overrides the choice. A machine without a GPU
+can build and run the CPU backends:
+
+    make cpu
+    make test-cpu
+    ./run.sh synthetic           # uses the CPU program with --backend cpu-mt
+
+6. Data
+-------
+
+The repository contains a 128 x 128 x 70 real sample cube (`data/sample`) and
+the manifests (with checksums) of the larger cubes. The larger cubes are
+fetched by the scripts in `scripts/` over HTTPS from public sources (no account
+needed); see `data/README.md` for every command, the sizes (up to 42 GB for the
+full tile) and the licences. Examples that need no download:
+
+    ./run.sh synthetic           # 2048 x 2048 x 48 generated cube
+    ./run.sh sample              # committed real sample cube, needs `.venv` for the figures
